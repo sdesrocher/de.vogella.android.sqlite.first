@@ -14,9 +14,11 @@ import java.util.List;
 import java.util.Random;
 
 import android.app.ListActivity;
+import android.media.Rating;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 
 public class TestDatabaseActivity extends ListActivity {
     private CommentsDataSource datasource;
@@ -43,15 +45,31 @@ public class TestDatabaseActivity extends ListActivity {
     public void onClick(View view) {
         @SuppressWarnings("unchecked")
         ArrayAdapter<Comment> adapter = (ArrayAdapter<Comment>) getListAdapter();
+
         Comment comment = null;
+        Rating rating = null;
         switch (view.getId()) {
             case R.id.add:
-                String[] comments = new String[] { "Cool", "Very nice", "Hate it" };
-                int nextInt = new Random().nextInt(3);
+                //String[] comments = new String[] { "Cool", "Very nice", "Hate it" };
+                //int nextInt = new Random().nextInt(3);
                 // save the new comment to the database
-                comment = datasource.createComment(comments[nextInt]);
+
+                EditText txtComment = (EditText) findViewById(R.id.etComment);
+                // Retrieve rating from the edit text
+                EditText txtRating = (EditText) findViewById(R.id.etRating);
+
+
+                comment = datasource.createComment(txtComment.getText().toString());
+                //pass rating as parameter
+                rating = datasource.createComment(txtRating.getText().toString());
+
+                //txtRating.setText("");
+                //txtComment.setText("");
                 adapter.add(comment);
+
+
                 break;
+
             case R.id.delete:
                 if (getListAdapter().getCount() > 0) {
                     comment = (Comment) getListAdapter().getItem(0);

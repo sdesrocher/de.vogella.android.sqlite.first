@@ -10,6 +10,7 @@ package css.cis3334.devogellaandroidsqlitefirst;
 public class Comment {
     private long id;
     private String comment;
+    private String rating;
 
     //retain the id and then show it in the table
     public long getId() {
@@ -31,10 +32,16 @@ public class Comment {
         this.comment = comment;
     }
 
+    //retrieving new rating
+    public String getRating () {return rating;}
+
+    //setting rating
+    public void setRating (String rating) {this.rating = rating;}
+
     // Will be used by the ArrayAdapter in the ListView
     @Override
     //changing the comment to toString to be shown
     public String toString() {
-        return comment;
+        return comment + rating;
     }
 }

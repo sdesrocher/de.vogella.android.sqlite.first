@@ -26,6 +26,8 @@ import android.util.Log;
         public static final String COLUMN_ID = "_id";
             //Label the column with the actaul comment in it
         public static final String COLUMN_COMMENT = "comment";
+        //add new rating filed
+        public static final String COLUMN_RATING = "rating";
 
             //Naming of the database
         private static final String DATABASE_NAME = "commments.db";
@@ -34,9 +36,7 @@ import android.util.Log;
 
         // Database creation sql statement - using the created table, comments, id and columns
         private static final String DATABASE_CREATE = "create table "
-                + TABLE_COMMENTS + "( " + COLUMN_ID
-                + " integer primary key autoincrement, " + COLUMN_COMMENT
-                + " text not null);";
+                + TABLE_COMMENTS + "( " + COLUMN_ID + " integer primary key autoincrement, " + COLUMN_COMMENT + " text not null" + COLUMN_RATING+ "TEXT);";
 
         /* SQL table create-------------------
         * CREATE TABLE comments(
@@ -61,6 +61,8 @@ import android.util.Log;
             Log.w(css.cis3334.devogellaandroidsqlitefirst.MySQLiteHelper.class.getName(),
                     "Upgrading database from version " + oldVersion + " to "
                             + newVersion + ", which will destroy all old data");
+
+
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_COMMENTS);
             onCreate(db);
         }
